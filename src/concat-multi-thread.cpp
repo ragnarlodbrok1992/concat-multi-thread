@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
     std::string file_extension = "cmt";
     std::string input_file = "None";
     std::vector<std::string> options;
-    std::vector<std::string> tokens;
+    std::vector<std::string> tokens_strings;
     std::fstream code_file;
 
     // Runtime start
@@ -56,11 +56,11 @@ int main(int argc, char** argv) {
         std::istringstream stream(data);
 
         // 4. Tokenize input
-        while (std::getline(stream, token, separator)) tokens.push_back(token);
+        while (std::getline(stream, token, separator)) tokens_strings.push_back(token);
 
-        // 5. Iterate tokens
+        // 5. Iterate tokens_strings
         int num = 0;
-        for (auto x : tokens) {
+        for (auto x : tokens_strings) {
             // DEBUG
             std::cout << "Token: " << num << " : " << x << std::endl;
             num++;
