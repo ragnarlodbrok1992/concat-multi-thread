@@ -1,6 +1,8 @@
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
 
 int main(int argc, char** argv) {
@@ -42,14 +44,27 @@ int main(int argc, char** argv) {
     if (input_file.compare("None") != 0) {
         std::cout << "Input file: " << input_file << std::endl;
         std::string data;
+        std::string token;
+        char separator = ' ';
 
         // Open file
         code_file.open(input_file);
 
         // Parsing goes here
         data = std::string((std::istreambuf_iterator<char>(code_file)), std::istreambuf_iterator<char>());
-        // DEBUG
-        std::cout << "Parsed data:\n" << data << std::endl;
+        std::replace(data.begin(), data.end(), '\n', ' ');
+        std::istringstream stream(data);
+
+        // 4. Tokenize input
+        while (std::getline(stream, token, separator)) tokens.push_back(token);
+
+        // 5. Iterate tokens
+        int num = 0;
+        for (auto x : tokens) {
+            // DEBUG
+            std::cout << "Token: " << num << " : " << x << std::endl;
+            num++;
+        }
 
         // Close file
         code_file.close();
